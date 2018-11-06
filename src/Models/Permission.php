@@ -13,6 +13,8 @@ use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Contracts\Permission as PermissionContract;
+use App\Traits\Uuids;
+
 
 class Permission extends Model implements PermissionContract
 {
@@ -20,6 +22,15 @@ class Permission extends Model implements PermissionContract
     use RefreshesPermissionCache;
 
     public $guarded = ['id'];
+
+    use Uuids;
+
+    public $incrementing = false;
+
+    /**
+     * @var string
+     */
+    protected $table = 'permissions';
 
     public function __construct(array $attributes = [])
     {

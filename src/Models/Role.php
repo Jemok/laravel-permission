@@ -12,6 +12,8 @@ use Spatie\Permission\Contracts\Role as RoleContract;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Traits\Uuids;
+
 
 class Role extends Model implements RoleContract
 {
@@ -19,6 +21,16 @@ class Role extends Model implements RoleContract
     use RefreshesPermissionCache;
 
     public $guarded = ['id'];
+
+    use Uuids;
+
+    public $incrementing = false;
+
+    /**
+     * @var string
+     */
+    protected $table = 'roles';
+
 
     public function __construct(array $attributes = [])
     {
